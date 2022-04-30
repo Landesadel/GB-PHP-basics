@@ -1,23 +1,33 @@
 <?php
+
 //Exercise 1:
 $question = "Вопрос: Что в конце XIX века было основным товаром на Лубянской площади в Москве во время Введенской ярмарки?\n";
 $answers = " 1: Марки\n 2: Медяки\n 3: Сани\n 4: Бублики\n";
-$n = 0;
+$n = 1;
 
+pointBack:
 echo $question . "\n" . $answers;
-$answerUser = (int)readline( "введите номер ответа: \n");
+$answerUser = readline( "введите номер ответа: \n");
+$answer = is_numeric($answerUser);
 
-if($n < 2) {
-    if($answerUser == 3) {
-        echo "Поздравляем, ответ верный!\n";
-    } else  {
-
-        echo "Ответ не верный, осталась 1 попытка.\n";
-        $n++;
+if ($answer == true) {
+    if ($answerUser == 3) {
+        echo " Ответ верный!";
+    } elseif ($answerUser > 4) {
+        echo "вариантов ответа всего 4, попробуйте ещё раз.\n";
+        goto pointBack;
+    } else {
+        if ($n < 2) {
+            echo "Не верный вариант ответа, осталась одна попытка.\n";
+            $n++;
+            goto pointBack;
+        } else {
+            echo "Не правильный вариант ответа, вы проиграли.";
+        }
     }
-} elseif ($n = 2) {
-    echo "Ответ не верный, к сожалению вы проиграли. \n";
-} else {
-    echo "Неправильный ввод, попробуйте еще раз! \n";
 
+} else  {
+ echo " Некорректный ввод, введите число!\n";
+    goto pointBack;
 }
+
