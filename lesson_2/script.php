@@ -5,7 +5,6 @@ $question = "Вопрос: Что в конце XIX века было основ
 $answers = " 1: Марки\n 2: Медяки\n 3: Сани\n 4: Бублики\n";
 $n = 1;
 
-pointBack:
 echo $question . "\n" . $answers;
 $answerUser = readline( "введите номер ответа: \n");
 $answer = is_numeric($answerUser);
