@@ -15,12 +15,12 @@ if ($numb == true) {
         $questionTask = readline("$userName, напишите какая задача стоит перед вами сегодня?\n");
         $questionTime = (int)readline("Сколько по времени займёт данная задача?\n");
         $sum += $questionTime;
-        $timeAndTask = $questionTask . "(" . $questionTime . ")\n";
-        $tasks =$taskString  . "- " . $timeAndTask;
+        $timeAndTask = "- " . $questionTask . "(" . $questionTime . ")\n";
+        $taskString .= $timeAndTask;
         $n++;
     } while ($n < $quantityTasks);
 
-    echo ("$userName, ваш список задач на сегодня: \n" . $tasks);
+    echo ("$userName, ваш список задач на сегодня: \n" . $taskString);
     echo ("Примерное время на выполнение плана: " . $sum . " часа/ов\n");
     echo "Удачного дня, $userName";
 }else {
