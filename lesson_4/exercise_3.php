@@ -6,11 +6,13 @@ $box = [
         1 => 'Книга',
         2 => 'Настольная игра',
         3 => [
+            'Шампанское',
             'Настольная игра',
             'Настольная игра',
         ],
         4 => [
             [
+                'Телефон',
                 'Ноутбук',
                 'Зарядное устройство'
             ],
@@ -38,3 +40,21 @@ $box = [
         ]
     ]
 ];
+
+$searchItem = (string)readline('Введите предмет который хотите найти: ');
+
+function searchInArr (string $searchItem, array $arr): bool {
+    foreach ($arr as $indexVal => $value) {
+        if (is_array($value)) {
+           return searchInArr($searchItem, $value);
+        } else {
+
+                if ($searchItem == $value) {
+                    return true;
+                }
+        }
+    }
+    return false;
+}
+
+var_dump(searchInArr($searchItem, $box));
