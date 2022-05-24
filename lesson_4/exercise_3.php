@@ -46,7 +46,8 @@ $searchItem = (string)readline('Введите предмет который х�
 function searchInArr (string $searchItem, array $arr): bool {
     foreach ($arr as $indexVal => $value) {
         if (is_array($value)) {
-           return searchInArr($searchItem, $value);
+            if(searchInArr($searchItem, $value))
+           return true;
         } else {
 
                 if ($searchItem == $value) {
