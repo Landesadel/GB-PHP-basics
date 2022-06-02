@@ -11,6 +11,7 @@ class UserProvider
         $this->pdo = $pdo;
     }
 
+
     public function registerUser(User $user, string $plainPassword): bool
     {
         $statement = $this->pdo->prepare(
@@ -24,7 +25,7 @@ class UserProvider
         ]);
     }
 
-    public function getByUserNameAndPassword(string $username, string $password): ?User
+    public function getByUsernameAndPassword(string $username, string $password): ?User
     {
         $statement = $this->pdo->prepare(
             'SELECT id, name, username FROM users WHERE username = :username AND password = :password LIMIT 1'
@@ -35,4 +36,5 @@ class UserProvider
         ]);
         return $statement->fetchObject(User::class, [$username]) ?: null;
     }
+
 }
