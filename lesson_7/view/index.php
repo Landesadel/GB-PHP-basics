@@ -8,6 +8,7 @@
 
     <?php if ($username === null): ?>
         <a href="/?controller=security">Join</a>
+        <a href="?controller=registration">Registration</a>
     <?php else: ?>
        <h3>Wellcome <?=$username?> : </h3> <br>
         <a href="/?controller=tasks">Tasks</a> <br>

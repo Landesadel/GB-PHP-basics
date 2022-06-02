@@ -1,12 +1,13 @@
 <?php
 
 
-class Task
+class Task extends Base
 {
+
     private string $description;
     private bool $isDone;
 
-    public function __construct(string $description, bool $isDone = false)
+    public function __construct(string $description = '', bool $isDone = false)
     {
         $this->description = $description;
         $this->isDone = $isDone;
@@ -33,4 +34,6 @@ class Task
     {
         $this->isDone = $isDone;
     }
+
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'User.php';
+
 
 class UserProvider
 {
@@ -23,6 +23,7 @@ class UserProvider
             'username' => $user->getUsername(),
             'password' => md5($plainPassword)
         ]);
+        return $this->pdo->lastInsertId();
     }
 
     public function getByUsernameAndPassword(string $username, string $password): ?User
@@ -34,7 +35,7 @@ class UserProvider
             'username' => $username,
             'password' => md5($password)
         ]);
-        return $statement->fetchObject(User::class, [$username]) ?: null;
+        return  $statement->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, User::class)[0] ?: null;
     }
 
 }

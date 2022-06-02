@@ -11,6 +11,13 @@ $pdo->exec('CREATE TABLE users (
   password VARCHAR(100) NOT NULL
 )');
 
+$pdo->exec('CREATE TABLE tasks (
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER,
+    description VARCHAR(150),
+    isDone TINYINT DEFAULT(0)
+)');
+
 $user = new User('admin');
 $user->setName('Master admin');
 

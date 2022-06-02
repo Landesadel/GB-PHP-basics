@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var Task $task
+ */
+?>
 <head>
     <meta charset="UTF-8">
     <title>Tasks</title>
@@ -22,15 +27,32 @@
     <h3><?=$username?>, ваши приоритетные задачи на сегодня: </h3>
     <ol>
     <?php foreach ($tasks as $task): ?>
-        <li>
+        <li id="<?=$task->getId()?>">
             <form class="flex_cont">
                 <p><?= $task->getDescription() ?></p>
-                <input class="task_btn" type="radio">
+                <a href="/?controller=tasks&action=done&id=<?=$task->getId()?>">[Done]</a>
+                <input class="done task_btn" type="checkbox" data-id="<?$task->getId()?>">
             </form>
 
         </li>
     <?php endforeach;?>
     </ol>
+
+    <script>
+        let buttons = document.querySelectorAll('.done');
+        buttons.forEach((elem) => {
+            elem.addEventListener('click', () => {
+                let id = elem.getAttribute('data-id');
+                (
+                    async () => {
+                        const response = await fetch('/?controller=tasks&action=apidone&id=' + id);
+                        const answer = await response.json();
+                        document.getElementById(answer.id).remove();
+                    }
+                )();
+            })
+        })
+    </script>
 </body>
 
 

@@ -1,31 +1,47 @@
 <?php
 
-
+require_once 'Task.php';
 class TaskProvider
 {
-    private array $tasks;
+    private PDO $pdo;
 
-    public function __construct()
+    public function __construct(PDO $pdo)
     {
-        $this->tasks = $_SESSION['tasks'] ?? [];
+        $this->pdo = $pdo;
+    }
+
+    public function doDoneTask(int $id): bool
+    {
+        $statement = $this->pdo->prepare(
+            'UPDATE tasks SET isDone = 1 WHERE id = :id AND user_id = :user_id'
+        );
+
+        return $statement->execute([
+            'user_id' => $_SESSION['user_id'],
+            'id' => $id,
+        ]);
     }
 
     public function getUndoneList(): array
     {
-        $tasks = [];
-        foreach ($this->tasks as $task)
-        {
-            if(!$task->isDone())
-            {
-                $tasks[] = $task;
-            }
-        }
-        return $tasks;
+        $statement = $this->pdo->prepare(
+            'SELECT * FROM tasks WHERE isDone = 0 AND user_id = :id'
+        );
+
+        $statement->execute([
+            'id' => $_SESSION['user_id'],
+        ]);
     }
 
-    public function addTask(Task $task): void
+    public function addTask(Task $task): bool
     {
-        $_SESSION['tasks'][] = $task;
-        $this->tasks[] = $task;
+        $statement = $this->pdo->prepare(
+            'INSERT INTO tasks (user_id, description) VALUES (:user_id, :description)'
+        );
+
+        return $statement->execute([
+            'user_id' => $_SESSION['user_id'],
+            'description' => $task->getDescription(),
+        ]);
     }
 }

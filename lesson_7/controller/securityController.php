@@ -1,5 +1,7 @@
 <?php
 
+require_once 'model/Base.php';
+require_once 'model/User.php';
 require 'model/UserProvider.php';
 $pdo = require 'db.php';
 session_start();
@@ -7,7 +9,7 @@ session_start();
 $error = null;
 
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
-    unset($_SESSION['username']);
+    session_destroy();
     header("Location: index.php");
     die();
 }
@@ -20,6 +22,7 @@ if (isset($_POST['username'], $_POST['password'])) {
         $error = 'Пользователь не найден.';
     } else {
         $_SESSION['username'] = $user;
+        $_SESSION['username'] = $user->getId();
         header("Location: index.php");
         die();
     }
