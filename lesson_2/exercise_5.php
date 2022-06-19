@@ -11,16 +11,16 @@ if ($num > 19) {
 }
 
 switch ($num) {
-    case 1: {
+    case 1:
         echo "У вас $numApple яблоко";
         break;
-    }
-    case 2: case 3: case 4: {
+
+    case 2: case 3: case 4:
         echo "У вас $numApple яблока";
         break;
-    }
-    default: {
+
+    default:
         echo "У вас $numApple яблок";
         break;
-    }
+
 }

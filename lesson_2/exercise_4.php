@@ -8,12 +8,10 @@ while ($i <= 100) {
       } else {
           echo " Fizz ";
       }
-      $i++;
   }elseif($i % 5 == 0) {
       echo " Buzz ";
-      $i++;
   }else {
       echo " $i ";
-      $i++;
   }
+  $i++;
 }

@@ -8,25 +8,32 @@ $n = 1;
 echo $question . "\n" . $answers;
 $answerUser = readline( "введите номер ответа: \n");
 $answer = is_numeric($answerUser);
-
-if ($answer == true) {
+while ($answer !== true) {
+    echo " Некорректный ввод, введите число!\n";
+    $answerUser = readline( "введите номер ответа: \n");
+    $answer = is_numeric($answerUser);
+}
+while ($n < 3) {
     if ($answerUser == 3) {
         echo " Ответ верный!";
-    } elseif ($answerUser > 4) {
+        break;
+    } elseif ($answerUser > 4 || $answerUser < 1) {
         echo "вариантов ответа всего 4, попробуйте ещё раз.\n";
-        goto pointBack;
+        $answerUser = readline( "введите номер ответа: \n");
     } else {
         if ($n < 2) {
             echo "Не верный вариант ответа, осталась одна попытка.\n";
+            $answerUser = readline( "введите номер ответа: \n");
             $n++;
-            goto pointBack;
         } else {
             echo "Не правильный вариант ответа, вы проиграли.";
+            break;
         }
     }
 
-} else  {
- echo " Некорректный ввод, введите число!\n";
-    goto pointBack;
 }
+
+
+
+
 
